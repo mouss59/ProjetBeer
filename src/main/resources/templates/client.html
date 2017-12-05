@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymLeaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout">
+<head>
+    <meta charset="utf-8"/>
+    <title>Mon Bar</title>
+    <link rel="stylesheet" type="text/css"
+          href="../static/bootstrap.min.css"
+          th:href="@{/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css"
+          href="../static/mystyle.css"
+          th:href="@{/mystyle.css}"/>
+</head>
+<body>
+<header>
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <u1 class = "nav navbar-nav">
+                <li><a th:href="@{/}">Mes Bar Preférés</a></li>
+                <li><a th:href="@{/beerprefere}">mes bierres preférées</a></li>
+
+            </u1>
+        </div>
+    </div>
+</header>
+<section layout:fragment="content"></section>
+<footer>
+    <div class="navbar-fixed-bottom">
+        <small>ELAZZAM Mustapha  Norhane ELGHARBI</small>
+    </div>
+</footer>
+</body>
+</html>
