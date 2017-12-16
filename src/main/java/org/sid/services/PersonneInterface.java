@@ -7,7 +7,7 @@ import org.sid.Entities.Personne;
 import java.util.List;
 
 public interface PersonneInterface {
-   /* public Personne chercherPersonneId(Long Id);
+    public Personne chercherPersonneId(Long Id);
     public Personne chercherPersonneLoginPass(String Login, String Password);
     public List<Personne> chercherPersonneStatus(String Status);
 
@@ -17,7 +17,7 @@ public interface PersonneInterface {
 
     public void ajouterBeerPrefere(Personne P ,Beer be);
     public void ajouterBarPrefere(Personne P ,Bar ba);
-*/
+
 
 
 

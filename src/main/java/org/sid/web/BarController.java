@@ -12,6 +12,7 @@ public class BarController {
 
     @RequestMapping("/operationBar")
     public String index(){
+
         return "bar";
     }
 }

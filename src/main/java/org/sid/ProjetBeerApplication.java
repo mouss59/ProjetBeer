@@ -30,15 +30,15 @@ public class ProjetBeerApplication implements CommandLineRunner{
 	BeerRepository beerRepository;
 	@Autowired
 	BarRepository barRepository;
-	//@Autowired
-	//PersonneRepository personneRepository;
+	@Autowired
+	PersonneRepository personneRepository;
 	
 	@Autowired
 	private BeerServiceInterface beerInterfaceMetier;
 	@Autowired
 	private BarServiceInterface barInterfaceMetier;
-	//@Autowired
-	//private PersonneInterface personneInterfaceMeteir;
+	@Autowired
+	private PersonneInterface personneInterfaceMeteir;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetBeerApplication.class, args);
@@ -49,24 +49,30 @@ public class ProjetBeerApplication implements CommandLineRunner{
 	@Override
 	public void run(String... strings) throws Exception {
 
-		System.out.println("totooooooooooooooooooooooooooooooooooooooooooooo");
-		Bar ba = barRepository.save(new Bar("bar5", "rue de toto"));
+		System.out.println("Mon app Bar beer");
+/*		Bar ba = barRepository.save(new Bar("bar5", "rue de toto"));
 		Beer be = beerRepository.save(new Beer("beerdebar6","lite",2));
-		//Beer be2 = beerRepository.save(new Beer("beerdebar3","lite",2));
+		Beer be2 = beerRepository.save(new Beer("beerdebar3","lite",2));
 
-		//ba.getBeers().add(be);
-		//ba.getBeers().add(be2);
-		//barRepository.save(ba);
 
-		//System.out.println("la taille du "+ba.getBeers().size()) ;
+		ba.getBeers().add(be);
+		ba.getBeers().add(be2);
+		barRepository.save(ba);
 
-		/*Personne p1 = personneRepository.save(new Personne("ELAZZAM", "Mustapha", "azzam", "password", "client", "toto@toto", "alunivbat"));
+
+
+		System.out.println("la taille du "+ba.getBeers().size()) ;
+
+		Personne p1 = personneRepository.save(new Personne("ELAZZAM", "Mustapha", "azzam", "password", "client", "toto@toto", "alunivbat"));
 
 		personneInterfaceMeteir.ajouterBarPrefere(p1, ba);
 		personneInterfaceMeteir.ajouterBeerPrefere(p1, be);
 
 		List<Beer> lBeer = personneInterfaceMeteir.beerPrefereParPersonne(p1);
+
 */
+
+
 
 	}
 

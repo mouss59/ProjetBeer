@@ -13,32 +13,36 @@ import java.util.List;
 @Transactional
 public class PersonneImplementation implements PersonneInterface {
 
-    /*
+
     @Autowired
     PersonneRepository personneRepository;
 
     @Override
-    public Personne chercherPersonneId(Long Id) {
-        return personneRepository.findByIdPersonne();
+    public Personne chercherPersonneId(Long id) {
+
+        return personneRepository.findByIdPersonne(id);
     }
 
     @Override
-    public Personne chercherPersonneLoginPass(String Login, String Password) {
-        return personneRepository.findByLoginAndPassword();
+    public Personne chercherPersonneLoginPass(String login, String password) {
+        return personneRepository.findByLoginAndPassword(login, password);
     }
 
     @Override
-    public List<Personne> chercherPersonneStatus(String Status) {
-        return personneRepository.findByStatus();
+    public List<Personne> chercherPersonneStatus(String status) {
+
+        return personneRepository.findByStatus(status);
     }
 
     @Override
     public List<Bar> barPrefereParPersonne(Personne P) {
+
         return P.getBarsPreferes();
     }
 
     @Override
     public List<Beer> beerPrefereParPersonne(Personne P) {
+
         return P.getBeersPreferes();
     }
 
@@ -53,5 +57,5 @@ public class PersonneImplementation implements PersonneInterface {
         P.getBarsPreferes().add(ba);
         personneRepository.save(P);
     }
-    */
+
 }
