@@ -2,6 +2,7 @@ package org.sid.services;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.sid.Entities.Bar;
 import org.sid.Entities.Beer;
 import org.sid.Entities.Personne;
@@ -26,7 +27,9 @@ public class BarServicesImplementation implements BarServiceInterface {
 	@Override
 	public Bar chercherBarId(Long id) {
 		// TODO Auto-generated method stub
-		return barRepository.findByIdBar(id);
+		Bar ba= barRepository.findByIdBar(id);
+		Hibernate.initialize(ba);
+		return ba;
 	}
 
 	@Override
@@ -43,8 +46,9 @@ public class BarServicesImplementation implements BarServiceInterface {
 
 	@Override
 	public Bar ajouterBeerToBar(Beer be, Bar ba) {
-		// TODO Auto-generated method stub
-		ba.getBeers().add(be);
+		Hibernate.initialize(ba.getBeers());
+		List<Beer> lBeers = ba.getBeers();
+		lBeers.add(be);
 		return barRepository.save(ba);
 		
 	}

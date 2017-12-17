@@ -18,13 +18,13 @@ public class Personne implements Serializable {
 	private String prenom;
 	private String email;
 	private String adress;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 		      name="Personne_Bar",
 		      joinColumns=@JoinColumn(name="PERSONNE_ID", referencedColumnName="idPersonne"),
 		      inverseJoinColumns=@JoinColumn(name="BAR_ID", referencedColumnName="idBar"))
 	private List<Bar> barsPreferes=new ArrayList<Bar>();
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 		      name="Personne_Beer",
 		      joinColumns=@JoinColumn(name="PERSONNE_ID", referencedColumnName="idPersonne"),

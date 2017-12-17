@@ -16,7 +16,7 @@ public class Bar implements Serializable {
 	private Long idBar;
 	private String nom;
 	private String adresse;
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(
 			name="BAR_BEER",
 			joinColumns=@JoinColumn(name="BAR_ID", referencedColumnName="idBar"),

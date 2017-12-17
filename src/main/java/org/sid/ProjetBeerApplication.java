@@ -49,31 +49,31 @@ public class ProjetBeerApplication implements CommandLineRunner{
 	@Override
 	public void run(String... strings) throws Exception {
 
-		System.out.println("Mon app Bar beer");
-/*		Bar ba = barRepository.save(new Bar("bar5", "rue de toto"));
-		Beer be = beerRepository.save(new Beer("beerdebar6","lite",2));
-		Beer be2 = beerRepository.save(new Beer("beerdebar3","lite",2));
 
 
-		ba.getBeers().add(be);
-		ba.getBeers().add(be2);
-		barRepository.save(ba);
+		//Beer be2 = beerRepository.save(new Beer("lilleBeer2","type2",2));
+		//System.out.println(be2.toString());
+		Bar ba1 = barInterfaceMetier.chercherBarId(Long.parseLong(String.valueOf(9)));
+		Bar ba2 = barInterfaceMetier.chercherBarId(Long.parseLong(String.valueOf(5)));
+		//System.out.println(ba1.toString());
+		Beer be1 = beerInterfaceMetier.ConsulterBeerId(Long.parseLong(String.valueOf(12)));
+		barInterfaceMetier.ajouterBeerToBar(be1,ba2);
 
 
+		List<Bar> listb = beerInterfaceMetier.trouverBarBeerNom("beer1");
+		for(int i=0 ; i < listb.size() ; i++){
+			System.out.println(listb.get(i).toString());
+		}
 
-		System.out.println("la taille du "+ba.getBeers().size()) ;
 
-		Personne p1 = personneRepository.save(new Personne("ELAZZAM", "Mustapha", "azzam", "password", "client", "toto@toto", "alunivbat"));
-
-		personneInterfaceMeteir.ajouterBarPrefere(p1, ba);
-		personneInterfaceMeteir.ajouterBeerPrefere(p1, be);
-
-		List<Beer> lBeer = personneInterfaceMeteir.beerPrefereParPersonne(p1);
-
-*/
+		//barInterfaceMetier.ajouterBeerToBar(be2,ba1);
 
 
 
+		//Personne p1 = personneRepository.save(new Personne("nom1","prenom1", "login1","password1","status1","e","add"));
+
+		//p1.getBeersPreferes().add(be2);
+		//personneInterfaceMeteir.ajouterBeerPrefere(p1,be2);
 	}
 
 }

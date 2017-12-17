@@ -1,5 +1,6 @@
 package org.sid.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -49,7 +50,25 @@ public class BeerServiceImplementation implements BeerServiceInterface {
 		
 	}
 
-	
-	
-	
+	@Override
+	public List<Bar> trouverBarBeerNom(String nomBeer) {
+    	Beer b = beerRepository.findByNomBeer(nomBeer);
+		return b.getBars();
+	}
+
+	@Override
+	public List<Bar> trouverBarBeerType(String type) {
+
+    	List<Beer> lb= ConsulterBeerType(type);
+		List<Bar> lbar=new ArrayList<Bar>();
+    	for(int i=0 ; i < lb.size() ; i++){
+			for(int j = 0; j < lb.get(i).getBars().size() ; j++){
+				lbar.add(lb.get(i).getBars().get(j));
+			}
+		}
+
+    	return lbar;
+	}
+
+
 }

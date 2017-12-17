@@ -11,6 +11,9 @@ public interface BeerServiceInterface {
 	public List<Beer> ConsulterBeerType(String type);
 	public Beer ConsulterBeerNom(String nom);
 	public void ajouterBeer(Beer b);
+
+	public List<Bar> trouverBarBeerNom(String nomBeer);
+	public List<Bar> trouverBarBeerType(String type);
 	
 	
 	//public List<Personne> ConsulterPersonner();

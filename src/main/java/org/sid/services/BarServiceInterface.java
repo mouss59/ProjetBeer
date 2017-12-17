@@ -20,4 +20,5 @@ public interface BarServiceInterface {
 	public List<Beer> ListerBeerBar(Bar ba);
 
 
+
 }

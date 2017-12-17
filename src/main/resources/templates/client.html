@@ -1,33 +1,116 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymLeaf.org"
-      xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout">
+      xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout"
+      layout:decorator="template1">
 <head>
     <meta charset="utf-8"/>
     <title>Mon Bar</title>
-    <link rel="stylesheet" type="text/css"
-          href="../static/bootstrap.min.css"
-          th:href="@{/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css"
-          href="../static/mystyle.css"
-          th:href="@{/mystyle.css}"/>
+
 </head>
 <body>
-<header>
-    <div class="navbar navbar-default">
-        <div class="container-fluid">
-            <u1 class = "nav navbar-nav">
-                <li><a th:href="@{/mesBarPreferes}">Mes Bar Preférés</a></li>
-                <li><a th:href="@{/beerspreferes}">mes bierres preférées</a></li>
+<div layout:fragment="content">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Chercher une bar par bierre</div>
+            <div class="panel-body">
+                <form th:action="@{/chercherBarBeerNom}" method="get">
+                    <div>
+                        <label>nom bierre:</label>
+                        <input type="text" name="nomBierre"/>
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
 
-            </u1>
+                </form>
+                <form th:action="@{/chercherBarBeerType}" method="get">
+                    <div>
+                        <label>type bierre:</label>
+                        <input type="text" name="typeBierre"/>
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
+                </form>
+            </div>
         </div>
+        <div class="panel panel-primary" th:if="${foundBarsNomBeer} or ${foundBarsTypeBeer}" >
+            <div class="panel-heading">Bar trouvées</div>
+            <div class="panel-body">
+
+                <table class="table"  >
+                    <thead>
+                    <tr>
+
+                        <th scope="col">Nom Bar</th>
+                        <th scope="col">Adress Bar</th>
+                        <th scope="col"> Action</th>
+                    </tr>
+                    </thead>
+                    <tbody  th:each="barsN :${foundBarsNomBeer}" th:if="${foundBarsNomBeer}">
+                    <tr>
+
+                        <td th:text="${barsN.nom}"></td>
+                        <td th:text="${barsN.adresse}"></td>
+                        <td>
+                            <!--<form th:action="@{/ajouterBeerBar}" method="POST" th:object="${foundBeer}">
+                                <input type="hidden" th:field="*{idBeer}"/>
+                                <input type="hidden" th:field="*{nomBeer}"/>
+                                <input type="hidden" th:field="*{typeBeer}"/>
+                                <input type="hidden" th:field="*{note}"/>
+
+
+
+                                <button type="submit" class="btn btn-xs btn-success" >Ajouter</button>
+                            </form>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody th:each="barsT :${foundBarsTypeBeer}" th:if="${foundBarsTypeBeer}">
+                    <tr>
+
+                        <td th:text="${barsT.nom}"></td>
+                        <td th:text="${barsT.adresse}"></td>
+                        <td>
+                            <!--<form th:action="@{/ajouterBeerBar}" method="POST" th:object="${beers}">
+                                <input type="hidden" th:field="*{idBeer}"/>
+                                <input type="hidden" th:field="*{nomBeer}"/>
+                                <input type="hidden" th:field="*{typeBeer}"/>
+                                <input type="hidden" th:field="*{note}"/>
+
+
+
+                                <button type="submit" class="btn btn-xs btn-success" >Ajouter</button>
+                            </form>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
-</header>
-<section layout:fragment="content"></section>
-<footer>
-    <div class="navbar-fixed-bottom">
-        <small>ELAZZAM Mustapha  Norhane ELGHARBI</small>
+    <div class="col-md-6">
+        <div class="panel panel-primary" th:if="${listBar}">
+            <div class="panel-heading">Mes Bars Preferés</div>
+            <div class="panel-body">
+                <table class="table" >
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom Bar</th>
+                        <th scope="col">Adresse Bar</th>
+
+                    </tr>
+                    </thead>
+                    <body th:each="barAff :${listBar}" >
+                    <tr>
+                        <td th:text="${barAff.nom}"></td>
+                        <td th:text="${barAff.adresse}"></td>
+                    </tr>
+                    </body>
+                </table>
+
+            </div>
+        </div>
+
     </div>
-</footer>
+
+</div>
 </body>
 </html>

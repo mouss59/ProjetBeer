@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+
 @Entity
 public class Beer implements Serializable {
 	@Id @GeneratedValue
@@ -16,9 +14,9 @@ public class Beer implements Serializable {
 	private String nomBeer;
 	private String typeBeer;
 	private int note;
-	@ManyToMany(mappedBy = "beers")
+	@ManyToMany(mappedBy = "beers" , fetch = FetchType.EAGER)
 	private List<Bar> bars = new ArrayList<Bar>();
-	@ManyToMany(mappedBy = "beersPreferes")
+	@ManyToMany(mappedBy = "beersPreferes" )
 	private List<Personne> personnes= new ArrayList<Personne>();
 
 	public Beer() {
