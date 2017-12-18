@@ -53,9 +53,14 @@ public class PersonneImplementation implements PersonneInterface {
     }
 
     @Override
-    public void ajouterBarPrefere(Personne P, Bar ba) {
+    public Personne ajouterBarPrefere(Personne P, Bar ba) {
         P.getBarsPreferes().add(ba);
-        personneRepository.save(P);
+        return personneRepository.save(P);
+    }
+
+    @Override
+    public Personne trouverPersonneLoginPassword(String login, String password) {
+        return personneRepository.findByLoginAndPassword(login,password);
     }
 
 }

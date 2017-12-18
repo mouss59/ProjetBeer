@@ -39,15 +39,13 @@ public class Bar implements Serializable {
 	}
 
 
-	public Long getId() {
+	public Long getIdBar() {
 		return idBar;
 	}
 
-
-	public void setId(Long id) {
-		this.idBar = id;
+	public void setIdBar(Long idBar) {
+		this.idBar = idBar;
 	}
-
 
 	public String getNom() {
 		return nom;

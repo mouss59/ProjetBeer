@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymLeaf.org"
       xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout"
-      layout:decorator="template1">
+      layout:decorator="template2">
 <head>
     <meta charset="utf-8"/>
     <title>Mon Bar</title>
 
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content1">
     <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">Chercher une bar par bierre</div>
@@ -16,68 +16,66 @@
                 <form th:action="@{/chercherBarBeerNom}" method="get">
                     <div>
                         <label>nom bierre:</label>
-                        <input type="text" name="nomBierre"/>
+                        <input type="text" name="nomBeer"/>
                         <button type="submit" class="btn btn-primary">OK</button>
                     </div>
-
+                </form>
+                <form th:action="@{/chercherBarNom}" method="get">
+                    <div>
+                        <label>nom bar</label>
+                        <input type="text" name="nomBar"/>
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
                 </form>
                 <form th:action="@{/chercherBarBeerType}" method="get">
                     <div>
                         <label>type bierre:</label>
-                        <input type="text" name="typeBierre"/>
+                        <input type="text" name="typeBeer"/>
                         <button type="submit" class="btn btn-primary">OK</button>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="panel panel-primary" th:if="${foundBarsNomBeer} or ${foundBarsTypeBeer}" >
-            <div class="panel-heading">Bar trouvées</div>
+        <div class="panel panel-primary" th:if="${foundBarsNomBeer} or ${foundBarsTypeBeer} or ${foundBarNomBar} " >
+            <div class="panel-heading">Bar trouvés</div>
             <div class="panel-body">
 
                 <table class="table"  >
                     <thead>
                     <tr>
-
+                        <th scope="col">id bar</th>
                         <th scope="col">Nom Bar</th>
                         <th scope="col">Adress Bar</th>
                         <th scope="col"> Action</th>
                     </tr>
                     </thead>
-                    <tbody  th:each="barsN :${foundBarsNomBeer}" th:if="${foundBarsNomBeer}">
-                    <tr>
-
+                    <tbody   th:if="${foundBarsNomBeer}">
+                    <tr th:each="barsN :${foundBarsNomBeer}">
+                        <td th:text="${barsN.idBar}"></td>
                         <td th:text="${barsN.nom}"></td>
                         <td th:text="${barsN.adresse}"></td>
-                        <td>
-                            <!--<form th:action="@{/ajouterBeerBar}" method="POST" th:object="${foundBeer}">
-                                <input type="hidden" th:field="*{idBeer}"/>
-                                <input type="hidden" th:field="*{nomBeer}"/>
-                                <input type="hidden" th:field="*{typeBeer}"/>
-                                <input type="hidden" th:field="*{note}"/>
-
-
-
-                                <button type="submit" class="btn btn-xs btn-success" >Ajouter</button>
-                            </form>-->
-                        </td>
                     </tr>
                     </tbody>
-                    <tbody th:each="barsT :${foundBarsTypeBeer}" th:if="${foundBarsTypeBeer}">
-                    <tr>
-
+                    <tbody  th:if="${foundBarsTypeBeer}">
+                    <tr th:each="barsT :${foundBarsTypeBeer}">
+                        <td th:text="${barsT.idBar}"></td>
                         <td th:text="${barsT.nom}"></td>
                         <td th:text="${barsT.adresse}"></td>
+                    </tr>
+                    </tbody>
+                    <tbody   th:if="${foundBarNomBar}">
+                    <tr>
+                        <td th:text="${foundBarNomBar.idBar}"></td>
+                        <td th:text="${foundBarNomBar.nom}"></td>
+                        <td th:text="${foundBarNomBar.adresse}"></td>
                         <td>
-                            <!--<form th:action="@{/ajouterBeerBar}" method="POST" th:object="${beers}">
-                                <input type="hidden" th:field="*{idBeer}"/>
-                                <input type="hidden" th:field="*{nomBeer}"/>
-                                <input type="hidden" th:field="*{typeBeer}"/>
-                                <input type="hidden" th:field="*{note}"/>
+                            <form th:action="@{/ajouterBarPrefere}" method="POST" th:object="${foundBarNomBar}">
+                                 <input type="hidden" th:field="*{idBar}"/>
+                                 <input type="hidden" th:field="*{nom}"/>
+                                 <input type="hidden" th:field="*{adresse}"/>
 
-
-
-                                <button type="submit" class="btn btn-xs btn-success" >Ajouter</button>
-                            </form>-->
+                                 <button type="submit" class="btn btn-xs btn-success" >Ajouter</button>
+                             </form>
                         </td>
                     </tr>
                     </tbody>

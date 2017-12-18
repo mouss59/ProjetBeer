@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class PersonneController {
     @Autowired
     private PersonneInterface personneMetier;
     @Autowired
-    private BarServiceInterface BarMetier;
+    private BarServiceInterface barMetier;
     @Autowired
     private BeerServiceInterface beerMetier;
 
@@ -29,36 +30,52 @@ public class PersonneController {
         return "client";
     }
 
+    @RequestMapping("/chercherBarNom")
+    public String ChercherBarNom(Model model, String nomBar){
+        Personne per = personneMetier.chercherPersonneId(Long.parseLong(String.valueOf(1)));
+        model.addAttribute("listBar",per.getBarsPreferes());
+        Bar bart = barMetier.chercherBarNom(nomBar);
+        model.addAttribute("foundBarNomBar", bart);
 
+        return "client";
+    }
 
-    @RequestMapping("/chercherBarBeerNom")
+    @RequestMapping(value="/chercherBarBeerNom", method=RequestMethod.GET)
     public String ChercherBarBeerNom(Model model, String nomBeer){
 
         Personne per = personneMetier.chercherPersonneId(Long.parseLong(String.valueOf(1)));
         model.addAttribute("listBar",per.getBarsPreferes());
 
-        List<Bar> lbar = beerMetier.trouverBarBeerNom(nomBeer);
-        model.addAttribute("foundBarsNomBeer",lbar);
+        List<Bar> lbarN = beerMetier.trouverBarBeerNom(nomBeer);
+        for(int i=0 ; i < lbarN.size() ; i++){
+            System.out.println(lbarN.get(i).toString());
+        }
+        model.addAttribute("foundBarNomBeer",lbarN);
 
         return "client";
     }
 
-    @RequestMapping("/chercherBarBeerType")
+    @RequestMapping(value="/chercherBarBeerType" , method= RequestMethod.GET)
     public String ChercherBarBeerType(Model model, String typeBeer){
 
         Personne per = personneMetier.chercherPersonneId(Long.parseLong(String.valueOf(1)));
         model.addAttribute("listBar",per.getBarsPreferes());
 
         List<Bar> lbar = beerMetier.trouverBarBeerType(typeBeer);
+
         model.addAttribute("foundBarsTypeBeer",lbar);
 
 
         return "client";
     }
 
-
+    @RequestMapping(value="/ajouterBarPrefere", method = RequestMethod.POST)
     public String AjouterAMesBarPref(Model model,Bar bar){
+        Personne person = personneMetier.chercherPersonneId(Long.parseLong(String.valueOf(1)));
 
+        Personne p = personneMetier.ajouterBarPrefere(person , bar);
+        model.addAttribute("PersonneBars",bar);
+        model.addAttribute("listBars",person.getBarsPreferes());
         return "client";
     }
 
