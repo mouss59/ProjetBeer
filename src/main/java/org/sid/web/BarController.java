@@ -34,9 +34,8 @@ public class BarController {
 
     @RequestMapping("/chercherBierreNom")
     public String ChercherBierreNom(Model model,String nomBierre, String barNom){
-        System.out.println("-----------------avant fonction ----------------------------");
+
         Bar ba = barMetier.chercherBarNom(barNom);
-        System.out.println(ba.toString());
         model.addAttribute("foundBar",ba);
         model.addAttribute("listBeers",ba.getBeers());
 
@@ -59,15 +58,10 @@ public class BarController {
 
         return "bar";
     }
-
-
-
-
-
     @RequestMapping("/ajouterBeerBar")
     public String AjouterBeerBar(Model model, Beer be, String barNom){
 
-      Bar ba = barMetier.chercherBarNom(barNom) ;
+        Bar ba = barMetier.chercherBarNom(barNom) ;
 
 
         Bar bar = barMetier.ajouterBeerToBar(be,ba);
@@ -76,19 +70,6 @@ public class BarController {
 
 
         return "bar";
-    }
-
-
-    @RequestMapping("/clientsFidels")
-    public String AfficherClients(Model model, String barNom){
-        Bar ba = barMetier.chercherBarNom(barNom) ;
-        List<Personne> lpers = barMetier.ListeClientDeMonBar(ba);
-
-        model.addAttribute("foundPerson", lpers);
-
-
-        return "BarClientsFidels";
-
     }
 
     @RequestMapping("/chercherBarNomBar")
@@ -100,6 +81,8 @@ public class BarController {
         model.addAttribute("listBeers",ba.getBeers());
         return "bar";
     }
+
+
 
 
 
