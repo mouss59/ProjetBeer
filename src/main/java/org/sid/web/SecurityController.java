@@ -16,20 +16,17 @@ public class SecurityController {
     private PersonneInterface personneMetier;
 
 
-    @RequestMapping(value="/")
-    public String home(){
+    @RequestMapping(value="/LoginPassword")
+    public String login(){
         return "loginpassword";
     }
 
-    @RequestMapping(value="/403")
-    public String accessDenied(){
-        return "403";
-    }
 
-    @RequestMapping(value="/LoginPassword")
-    public String loginPassword(Model model, @RequestParam("login") String login,@RequestParam("password") String password){
 
-        Personne per = personneMetier.trouverPersonneLoginPassword(login,password);
+    @RequestMapping(value="/")
+    public String home(){
+
+        /*Personne per = personneMetier.trouverPersonneLoginPassword(login,password);
         System.out.println(per.toString());
         if (per.getStatus().equals("client")) {
             model.addAttribute("foundUser", per);
@@ -37,8 +34,16 @@ public class SecurityController {
         } else if(per.getStatus().equals("barman")){
             model.addAttribute("foundUser",per);
             return "bar";
-        }else
-            return "loginpassword";
+        }else*/
+        //Personne per = personneMetier.trouverPersonneLoginPassword(username,password);
+
+            return "redirect:/operationBar";
     }
 
+
+
+    @RequestMapping(value="/403")
+    public String accessDenied(){
+        return "403";
+    }
 }
