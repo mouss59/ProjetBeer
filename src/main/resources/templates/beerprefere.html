@@ -1,33 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymLeaf.org"
-      xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout">
+      xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout"
+      layout:decorator="template2">
 <head>
     <meta charset="utf-8"/>
     <title>Mon Bar</title>
-    <link rel="stylesheet" type="text/css"
-          href="../static/bootstrap.min.css"
-          th:href="@{/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css"
-          href="../static/mystyle.css"
-          th:href="@{/mystyle.css}"/>
+
 </head>
 <body>
-<header>
-    <div class="navbar navbar-default">
-        <div class="container-fluid">
-            <u1 class = "nav navbar-nav">
-                <li><a th:href="@{/Bar}">Mes bars preferes</a></li>
-                <li><a th:href="@{/Bar}">mes bierres preferes</a></li>
+<div layout:fragment="content1">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Ajouter bierre prefere</div>
+            <div class="panel-body">
 
-            </u1>
+                <form th:action="@{/chercherBeerNom}" method="get">
+                    <div>
+                        <label>nom bar</label>
+                        <input type="text" name="nomBeer"/>
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
+                </form>
+
+            </div>
         </div>
+        <div class="panel panel-primary" th:if="${foundBeerNomBeer} " >
+            <div class="panel-heading">Bierre trouvé</div>
+            <div class="panel-body">
+
+                <table class="table"  >
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom bierre</th>
+                        <th scope="col">Type bierre</th>
+                        <th scope="col">note </th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody   th:if="${foundBeerNomBeer}">
+                    <tr>
+                        <td th:text="${foundBeerNomBeer.nomBeer}"></td>
+                        <td th:text="${foundBeerNomBeer.typeBeer}"></td>
+                        <td th:text="${foundBeerNomBeer.note}"></td>
+
+                        <td>
+                            <form th:action="@{/ajouterBeerPerson}" method="POST" th:object="${foundBeerNomBeer}">
+                                <input type="hidden" th:field="*{idBeer}"/>
+                                <input type="hidden" th:field="*{nomBeer}"/>
+                                <input type="hidden" th:field="*{typeBeer}"/>
+                                <input type="hidden" th:field="*{note}"/>
+
+                                <button type="submit" class="btn btn-xs btn-success" >Ajouter</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
-</header>
-<section layout:fragment="content"></section>
-<footer>
-    <div class="navbar-fixed-bottom">
-        <small>ELAZZAM Mustapha  Norhane ELGHARBI</small>
+    <div class="col-md-6">
+        <div class="panel panel-primary" th:if="${listBeer}">
+            <div class="panel-heading">Mes Bierres Preferées</div>
+            <div class="panel-body">
+                <table class="table" >
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom Bierre</th>
+                        <th scope="col">type Bierre</th>
+                        <th scope="col">Note Bierre</th>
+
+                    </tr>
+                    </thead>
+                    <body th:each="beerAff :${listBeer}" >
+                    <tr>
+                        <td th:text="${beerAff.nomBeer}"></td>
+                        <td th:text="${beerAff.typeBeer}"></td>
+                        <td th:text="${beerAff.note}"></td>
+                    </tr>
+                    </body>
+                </table>
+
+            </div>
+        </div>
+
     </div>
-</footer>
+
+</div>
 </body>
 </html>

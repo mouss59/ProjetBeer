@@ -1,6 +1,7 @@
 package org.sid.web;
 
 import org.sid.Entities.Bar;
+import org.sid.Entities.Beer;
 import org.sid.Entities.Personne;
 import org.sid.services.BarServiceInterface;
 import org.sid.services.BeerServiceInterface;
@@ -30,12 +31,16 @@ public class PersonneController {
         return "client";
     }
 
-    @RequestMapping("/chercherBarNom")
-    public String ChercherBarNom(Model model, String nomBar){
+
+    @RequestMapping("/chercherBarNomP")
+    public String ChercherBarNomP(Model model, String nomBar){
         Personne per = personneMetier.chercherPersonneId(Long.parseLong(String.valueOf(1)));
-        model.addAttribute("listBar",per.getBarsPreferes());
-        Bar bart = barMetier.chercherBarNom(nomBar);
-        model.addAttribute("foundBarNomBar", bart);
+        //model.addAttribute("listBar",per.getBarsPreferes());
+        Bar bar = barMetier.chercherBarNom(nomBar);
+
+        List<Beer> lbe =barMetier.ListerBeerBar(bar);
+
+        model.addAttribute("foundBarBeer", lbe);
 
         return "client";
     }
@@ -69,7 +74,7 @@ public class PersonneController {
         return "client";
     }
 
-    @RequestMapping(value="/ajouterBarPrefere", method = RequestMethod.POST)
+    /*@RequestMapping(value="/ajouterBarPrefere", method = RequestMethod.POST)
     public String AjouterAMesBarPref(Model model,Bar bar){
         Personne person = personneMetier.chercherPersonneId(Long.parseLong(String.valueOf(1)));
 
@@ -77,6 +82,6 @@ public class PersonneController {
         model.addAttribute("PersonneBars",bar);
         model.addAttribute("listBars",person.getBarsPreferes());
         return "client";
-    }
+    }*/
 
 }

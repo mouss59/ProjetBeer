@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymLeaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout"
+      layout:decorator="template2">
+<head>
+    <meta charset="utf-8"/>
+    <title>Mon Bar</title>
+
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">ajouter Bar prefere</div>
+            <div class="panel-body">
+
+                <form th:action="@{/chercherBarNom}" method="get">
+                    <div>
+                        <label>nom bar</label>
+                        <input type="text" name="nomBar"/>
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="panel panel-primary" th:if="${foundBarNomBar} " >
+            <div class="panel-heading">Bar trouvés</div>
+            <div class="panel-body">
+
+                <table class="table"  >
+                    <thead>
+                    <tr>
+                        <th scope="col">id bar</th>
+                        <th scope="col">Nom Bar</th>
+                        <th scope="col">Adress Bar</th>
+                        <th scope="col"> Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody   th:if="${foundBarNomBar}">
+                    <tr>
+                        <td th:text="${foundBarNomBar.idBar}"></td>
+                        <td th:text="${foundBarNomBar.nom}"></td>
+                        <td th:text="${foundBarNomBar.adresse}"></td>
+                        <td>
+                            <form th:action="@{/ajouterBarPrefere}" method="POST" th:object="${foundBarNomBar}">
+                                <input type="hidden" th:field="*{idBar}"/>
+                                <input type="hidden" th:field="*{nom}"/>
+                                <input type="hidden" th:field="*{adresse}"/>
+
+                                <button type="submit" class="btn btn-xs btn-success" >Ajouter</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary" th:if="${listBar}">
+            <div class="panel-heading">Mes Bars Preferés</div>
+            <div class="panel-body">
+                <table class="table" >
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom Bar</th>
+                        <th scope="col">Adresse Bar</th>
+
+                    </tr>
+                    </thead>
+                    <body th:each="barAff :${listBar}" >
+                    <tr>
+                        <td th:text="${barAff.nom}"></td>
+                        <td th:text="${barAff.adresse}"></td>
+                    </tr>
+                    </body>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

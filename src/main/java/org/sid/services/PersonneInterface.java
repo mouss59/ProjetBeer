@@ -15,7 +15,7 @@ public interface PersonneInterface {
     public List<Beer> beerPrefereParPersonne(Personne P);
 
 
-    public void ajouterBeerPrefere(Personne P ,Beer be);
+    public Personne ajouterBeerPrefere(Personne P ,Beer be);
     public Personne ajouterBarPrefere(Personne P ,Bar ba);
     public Personne trouverPersonneLoginPassword(String login, String password);
 

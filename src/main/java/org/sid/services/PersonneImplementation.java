@@ -47,9 +47,9 @@ public class PersonneImplementation implements PersonneInterface {
     }
 
     @Override
-    public void ajouterBeerPrefere(Personne P, Beer be) {
+    public Personne ajouterBeerPrefere(Personne P, Beer be) {
         P.getBeersPreferes().add(be);
-        personneRepository.save(P);
+        return personneRepository.save(P);
     }
 
     @Override

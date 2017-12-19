@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymLeaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeLeaf/Layout"
+      layout:decorator="template1">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"/>
+    <title>Mon Bar</title>
+
 </head>
 <body>
+<div layout:fragment="content">
+
+
+
+    <div class="col-md-6">
+           <div class="panel panel-primary">
+            <div class="panel-heading">ajouter une bierre</div>
+            <div class="panel-body">
+                <div class="panel-body">
+                    <form th:action="@{/ajouterBeer}" method="GET">
+                        <div>
+                            <label>nom Bar:</label>
+                            <input type="text" name="beerNom"/>
+                        </div>
+                        <div>
+                            <label>Type Bar:</label>
+                            <input type="text" name="beerType"/>
+                            <button type="submit" class="btn btn-primary">OK</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
 
 </body>
 </html>
